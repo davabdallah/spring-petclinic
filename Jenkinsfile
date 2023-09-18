@@ -4,26 +4,25 @@ pipeline{
        }
     }
     environment {
-
     }
     tools {
         maven "maven3" 
     }
     stages{
         stage('Sonar Quality Check'){
-            container('maven'){
-                steps{
+            steps{
+                container('maven'){
                     script{
                         withSonarQubeEnv(credentialsId: 'sonarqube.jenkins') {
                             sh 'mvn clean package sonar:sonar'   
-                         }
+                        }
                     }
                 }
             }   
         } 
         stage ('Quality Gate Status'){
-            container('mavin'){
-                steps{
+            steps{
+                container('mavin'){
                     script{
                          withSonarQubeEnv(credentialsId: 'sonarqube.jenkins'){
                             sh 'mvn clean package sonar:sonar' 
@@ -33,8 +32,8 @@ pipeline{
             }
         }
         stage ('Build'){
-            container('maven'){
-                steps{
+            steps{
+                container('maven'){
                     script{
                         sh 'chmod +x mvnw'
                         sh './mvnw clean package spring-boot:build-image'                    
@@ -43,18 +42,16 @@ pipeline{
         }
     }
         stage ("Upload"){
-            container('kaniko')
             steps{
-                script{
-                     withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
-                        sh 'docker login -u admin -p $nexus_creds 10.108.101.73:8083'
-
-                        sh 'docker push 10.108.101.73:8083/spring-petclinic'
-
-                        sh 'docker rmi 10.108.101.73:8083/spring-petclinic'
+                container('kaniko'){
+                    script{
+                        withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
+                            sh 'docker login -u admin -p $nexus_creds 10.108.101.73:8083'
+                            sh 'docker push 10.108.101.73:8083/spring-petclinic'
+                        }
                     }
                 }
             }
-        }
-    }    
-}   
+        }    
+    } 
+}
