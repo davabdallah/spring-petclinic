@@ -3,8 +3,7 @@ pipeline{
        inheritFrom 'default'
        }
     }
-    environment {
-    }
+
     tools {
         maven "maven3" 
     }
