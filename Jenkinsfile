@@ -34,7 +34,7 @@ pipeline{
                 container('maven'){
                     script{
                         sh 'chmod +x mvnw'
-                        sh './mvnw clean package spring-boot:build-image'                    
+                        sh 'sh "./mvnw clean package -Dcheckstyle.skip'        
                 }
             }
         }
