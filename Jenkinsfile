@@ -20,7 +20,7 @@ pipeline{
         } 
         stage ('Quality Gate Status'){
             steps{
-                container('mavin'){
+                container('maven'){
                     script{
                          withSonarQubeEnv(credentialsId: 'sonarqube.jenkins'){
                             sh 'mvn clean package sonar:sonar' 
