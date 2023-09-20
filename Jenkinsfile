@@ -1,5 +1,7 @@
 pipeline{
-    agent any 
+    agent {kubernetes {
+          inheritFrom 'default'
+  } }
 
     tools {
         maven "maven3" 
