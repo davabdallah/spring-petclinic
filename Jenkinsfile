@@ -41,11 +41,12 @@ pipeline{
     }
         stage ("Upload"){
             steps{
-                container('kaniko'){
+                container('podman'){
                     script{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
-                            sh 'docker login -u admin -p $nexus_creds 10.108.101.73:8083'
-                            sh 'docker push 10.108.101.73:8083/spring-petclinic'
+                            sh 'podman build -t 10.108.101.73:8083/spring-petclinic ."
+                            sh 'podman login -u admin -p $nexus_creds 10.108.101.73:8083'
+                            sh 'podman push 10.108.101.73:8083/spring-petclinic'
                         }
                     }
                 }
