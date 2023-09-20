@@ -34,7 +34,7 @@ pipeline{
                 container('maven'){
                     script{
                         sh 'chmod +x mvnw'
-                        sh 'sh "./mvnw clean package -Dcheckstyle.skip'        
+                        sh './mvnw clean package -Dcheckstyle.skip'        
                 }
             }
         }
