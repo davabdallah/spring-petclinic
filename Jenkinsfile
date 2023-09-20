@@ -46,9 +46,9 @@ pipeline{
             steps{
                     script{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
-                            sh 'sudo podman build -t 10.108.101.73:8083/spring-petclinic .'
-                            sh 'sudo podman login -u admin -p $nexus_creds 10.108.101.73:8083'
-                            sh 'sudo podman push 10.108.101.73:8083/spring-petclinic'
+                            sh 'podman build -t 10.108.101.73:8083/spring-petclinic .'
+                            sh 'podman login -u admin -p $nexus_creds 10.108.101.73:8083'
+                            sh 'podman push 10.108.101.73:8083/spring-petclinic'
                     }
                 }
             }
