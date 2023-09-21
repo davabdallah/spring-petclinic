@@ -1,14 +1,9 @@
-FROM jenkins/jenkins:jdk17-preview 
+FROM docker.io/openjdk:17-jdk-slim4
 
-RUN mkdir /var/jenkins_home/Spring-Project
+COPY  ./target /Spring-Project
 
-WORKDIR /var/jenkins_home/Spring-Project
-
-COPY  . .
-
-RUN ./mvnw clean package -DskipTests
-RUN ./mvnw spring-boot:build-image
+WORKDIR /Spring-Project
 
 EXPOSE 8080
 
-ENTRYPOINT [java -jar target/*.jar]
+ENTRYPOINT ["sh", "-c" ,"java -jar *.jar"]
