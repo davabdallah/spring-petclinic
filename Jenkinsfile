@@ -43,6 +43,7 @@ pipeline{
            agent {
                label 'podman'
            }
+            container('podman'){
             steps{
                     script{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
@@ -54,4 +55,5 @@ pipeline{
             }
         }    
     } 
+}
 }
