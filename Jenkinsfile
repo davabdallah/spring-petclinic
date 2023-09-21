@@ -7,7 +7,11 @@ pipeline{
         maven "maven3" 
     }
     stages{
+        
         stage('Sonar Quality Check'){
+            agent {
+               label 'podman'
+           }
             steps{
                 container('maven'){
                     script{
@@ -19,6 +23,9 @@ pipeline{
             }   
         } 
         stage ('Quality Gate Status'){
+            agent {
+               label 'podman'
+           }
             steps{
                 container('maven'){
                     script{
@@ -30,6 +37,9 @@ pipeline{
             }
         }
         stage ('Build'){
+            agent {
+               label 'podman'
+           }
             steps{
                 container('maven'){
                     script{
@@ -40,6 +50,9 @@ pipeline{
         }
     }
         stage ("Upload"){
+            agent {
+               label 'podman'
+           }
             steps{
                 container('podman'){
                     script{
