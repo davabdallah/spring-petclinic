@@ -4,9 +4,9 @@ RUN mkdir /var/jenkins_home/Spring-Project
 
 WORKDIR /var/jenkins_home/Spring-Project
 
-COPY  . /Spring-Project
+COPY  . .
 
-RUN  /Spring-Project/mvnw package
+RUN  ./mvnw package
 
 EXPOSE 8080
 
