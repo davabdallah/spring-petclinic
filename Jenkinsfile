@@ -43,8 +43,8 @@ pipeline{
            agent {
                label 'podman'
            }
-            container('podman'){
             steps{
+                container('podman'){
                     script{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
                             sh 'podman build -t 10.108.101.73:8083/spring-petclinic .'
