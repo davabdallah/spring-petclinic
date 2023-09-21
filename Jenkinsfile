@@ -44,7 +44,9 @@ pipeline{
                 container('podman'){
                     script{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
-                            sh 'podman build spring-petclinic:1 .'
+                            sh 'chown -R jenkins:jenkins /var/lib/containers'
+                            sh  'chmod -R 777 /var/lib/containers'
+                            sh 'podman build -t spring-petclinic:1 .'
                             sh 'podman login -u admin -p $nexus_creds 10.108.101.73:8083'
                             sh 'podman push 10.108.101.73:8083/spring-petclinic'
                     }
