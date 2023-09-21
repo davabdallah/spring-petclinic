@@ -40,9 +40,6 @@ pipeline{
         }
     }
         stage ("Upload"){
-           agent {
-               label 'podman'
-           }
             steps{
                 container('podman'){
                     script{
