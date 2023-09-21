@@ -1,6 +1,8 @@
 FROM jenkins/jenkins:jdk17-preview 
 
-RUN  mkdir /Spring-Project
+RUN mkdir /var/jenkins_home/Spring-Project
+
+WORKDIR /var/jenkins_home/Spring-Project
 
 COPY  . /Spring-Project
 
