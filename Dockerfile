@@ -6,7 +6,7 @@ WORKDIR /var/jenkins_home/Spring-Project
 
 COPY  . .
 
-RUN  ./mvnw package
+RUN  ./mvnw spring-boot:build-image
 
 EXPOSE 8080
 
