@@ -1,4 +1,4 @@
-FROM docker.io/openjdk:17-jdk-slim4
+FROM mediasol/openjdk17-slim-jprofiler:latest
 
 COPY  ./target /Spring-Project
 
