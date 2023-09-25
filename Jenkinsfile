@@ -48,7 +48,7 @@ pipeline{
                             sh 'chown -R podman:podman /var/lib/containers'
                             sh 'chmod -R 777 /var/lib/containers'
                             sh 'podman build -t 10.108.101.73:8083/spring-petclinic .'
-                            sh 'podman login -u admin -p $nexus_creds https://10.108.101.73:8083'
+                            sh 'podman login -u admin -p $nexus_creds https://10.108.101.73'
                             sh 'podman push https://10.108.101.73/mydocker/spring-petclinic'
                     }
                 }
