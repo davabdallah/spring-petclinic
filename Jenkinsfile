@@ -47,6 +47,7 @@ pipeline{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
                             sh 'chown -R podman:podman /var/lib/containers'
                             sh 'chmod -R 777 /var/lib/containers'
+                            sh 'export GODEBUG=x509ignoreCN=0'
                             sh 'echo "10.182.0.3 nexus.atostask.com" >> /etc/hosts'
                             sh 'podman build -t nexus.atostask.com:8083/spring-petclinic .'
                             sh 'podman login -u admin -p $nexus_creds nexus.atostask.com'
