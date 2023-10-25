@@ -41,7 +41,7 @@ environment {
             steps{
                 container('maven'){
                     script{
-                         waitForQualityGate abortPipeline: false, credentialsId:(credentialsId: 'jenkins-sonarqube')
+                         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube'
 
                     }
                 }
