@@ -52,17 +52,16 @@ environment {
             steps{
                 container('podman'){
                     script{
-                        withCredentials([string(credentialsId: 'nexus-jenkins', variable: 'nexus_creds')]) {
+                        withCredentials([string(credentialsId: 'jenkins-nexus', variable: 'nexus_creds')]) {
 
-                            sh 'export GODEBUG=x509ignoreCN=0'
                             sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
                             sh 'podman build -t nexus.atos.test:8083/spring-petclinic:${VERSION} .'
                             sh 'podman login --tls-verify=false -u admin -p $nexus_creds nexus.atos.test'
                             sh 'podman push nexus.atos.test/nexus-docker/spring-petclinic'
+                        }
                     }
                 }
-            }
-        }    
-    } 
- }
+            }     
+        } 
+    }
 }
