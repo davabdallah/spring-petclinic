@@ -6,7 +6,7 @@ pipeline{
 
 environment {
     VERSION = "${env.BUILD_ID}"
-    $nexus_creds = "Dav_-123"
+    nexus_creds = "Dav_-123"
 }
 
     tools {
