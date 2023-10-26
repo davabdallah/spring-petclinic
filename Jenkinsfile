@@ -6,6 +6,7 @@ pipeline{
 
 environment {
     VERSION = "${env.BUILD_ID}"
+    $nexus_creds = "Dav_-123"
 }
 
     tools {
@@ -52,7 +53,6 @@ environment {
             steps{
                 container('podman'){
                     script{
-                        withCredentials([string(credentialsId: 'jenkins-nexus', variable: 'nexus_creds')]) {
 
                             sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
                             sh 'podman build -t nexus.atos.test:8083/spring-petclinic:${VERSION} .'
@@ -64,4 +64,3 @@ environment {
             }     
         } 
     }
-}
