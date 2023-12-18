@@ -50,12 +50,11 @@ environment {
         }
 
         stage ("Upload"){
+            git://github.com/davabdallah/spring-petclinic.git
             steps{
                 container('kaniko'){
                     script{
-
-                            sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
-                            sh '/kaniko/executor -f $WORKSPACE/dockerfile -c $WORKSPACE/ --insecure --skip-tls-verify --cache=true --destination=http://nexus.atos.test/repository/nexus-docker/spring-petclinic:${VERSION}'
+                            sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=http://nexus.atos.test/repository/nexus-docker/spring-petclinic:${VERSION}'
 
                         }
                     }
