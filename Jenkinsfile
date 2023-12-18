@@ -54,8 +54,11 @@ environment {
                 container('kaniko'){
                     script{
 
-                            sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
-                            sh '/kaniko/executor -f $WORKSPACE/dockerfile -c $WORKSPACE/ --insecure --skip-tls-verify --cache=true --destination=http://nexus.atos.test/repository/nexus-docker/spring-petclinic:${VERSION}'
+                          echo "Adding entry to /etc/hosts"
+                sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
+
+                echo "Running Kaniko"
+                sh '/kaniko/executor --context $(WORKSPACE) --dockerfile $(WORKSPACE)/Dockerfile --destination=http://nexus.atos.test/repository/nexus-docker/spring-petclinic:${VERSION} --dockerconfig /secret/config.json'
 
                         }
                     }
