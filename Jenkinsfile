@@ -55,9 +55,8 @@ environment {
                     script{
 
                             sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
-                            sh 'podman build -t nexus.atos.test:8083/spring-petclinic:${VERSION} .'
-                            sh 'podman login --tls-verify=false -u admin -p $nexus_creds nexus.atos.test'
-                            sh 'podman push nexus.atos.test/nexus-docker/spring-petclinic'
+                            sh '/kaniko/executor --context $(WORKSPACE) --dockerfile $(WORKSPACE)/Dockerfile --destination=http://nexus.atos.test/repository/nexus-docker/spring-petclinic:${VERSION} --dockerconfig /secret/config.json'
+
                         }
                     }
                 }
