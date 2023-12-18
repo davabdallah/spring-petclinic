@@ -51,7 +51,7 @@ environment {
 
         stage ("Upload"){
             steps{
-                container('podman'){
+                container('kaniko'){
                     script{
 
                             sh 'echo "34.18.2.177 nexus.atos.test" >> /etc/hosts'
