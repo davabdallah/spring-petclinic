@@ -52,7 +52,7 @@ environment {
         stage ("Upload"){
             git://github.com/davabdallah/spring-petclinic.git
             steps{
-                container('kaniko'){
+                container(name: 'kaniko', shell: '/busybox/sh'){
                     script{
                             sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=http://nexus.atos.test/repository/nexus-docker/spring-petclinic:${VERSION}'
 
